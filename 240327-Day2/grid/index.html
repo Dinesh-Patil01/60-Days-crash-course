@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .parent{
+            /* border: 2px dotted blue; */
+            display: grid;
+            text-align: center;
+           
+        }
+        .container{
+            /* border: 2px solid red; */
+            justify-content: center;
+            display: grid;
+            grid-template-columns: repeat(6,190px);
+            grid-template-rows: repeat(10,50px);
+            gap:15px 25px;
+            margin-top: 10px;
+            border-radius: 40px;
+      }
+      .container>div{
+        /* border: 2px solid red; */
+        border-radius: 40px;
+        padding-top: 10px;
+      }
+      .time{
+        background: rgb(188,238,242);
+      }
+      .p{
+        background:rgb(255,214,239);
+        padding-bottom: 20px;
+      }
+      .t{
+        background:rgb(250,236,170);
+      }
+      .note{
+        /* border: 2px solid red; */
+        border-radius: 40px;
+        height: 40px;
+        margin-top: 28px;
+        text-align:start;
+        background:rgb(188,238,242);
+        width: 84%;
+      }
+
+      .wrapper{
+        display: flex;
+        justify-content: center;
+      }
+      b{
+        font-size: x-large;
+      }
+    </style>
+</head>
+<body>
+    <div class="parent">
+        <img style="width: 100%;" src="img.png" alt="">
+        <!-- <h1>Weekly Schedule</h1> -->
+        <div class="container">
+            <div></div>
+            <div class="p"><b>Monday</b></div>
+            <div class="t"><b>Tuesday</b></div>
+            <div class="p"><b>Wednesday</b></div>
+            <div class="t"><b>Thursday</b></div>
+            <div class="p"><b>friday</b></div>
+            <div class="time"><b>08:00</b></div>
+                <div class="p"></div>
+                <div class="t"></div>
+                <div class="p"></div>
+                <div class="t"></div>
+                <div class="p"></div>
+            <div class="time"><b>09:00</b></div>
+                <div class="p"></div>
+                <div class="t"></div>
+                <div class="p"></div>
+                <div class="t"></div>
+                <div class="p"></div>
+            <div class="time"><b>10:00</b></div>
+                <div class="p"></div>
+                <div class="t"></div>
+                <div class="p"></div>
+                <div class="t"></div>
+                <div class="p"></div>
+            <div class="time"><b>11:00</b></div>
+                <div class="p"></div>
+                <div class="t"></div>
+                <div class="p"></div>
+                <div class="t"></div>
+                <div class="p"></div>
+            <div class="time"><b>12:00</b></div>
+                <div class="p"></div>
+                <div class="t"></div>
+                <div class="p"></div>
+                <div class="t"></div>
+                <div class="p"></div>
+            <div class="time"><b>13:00</b></div>
+                <div class="p"></div>
+                <div class="t"></div>
+                <div class="p"></div>
+                <div class="t"></div>
+                <div class="p"></div>
+            <div class="time"><b>14:00</b></div>
+                <div class="p"></div>
+                <div class="t"></div>
+                <div class="p"></div>
+                <div class="t"></div>
+                <div class="p"></div>
+            <div class="time"><b>15:00</b></div>
+                <div class="p"></div>
+                <div class="t"></div>
+                <div class="p"></div>
+                <div class="t"></div>
+                <div class="p"></div>
+            <div class="time"><b>16:00</b></div>
+                <div class="p"></div>
+                <div class="t"></div>
+                <div class="p"></div>
+                <div class="t"></div>
+                <div class="p"></div>
+        </div>
+        <div class="wrapper">
+            <div class="note">
+                <b style=" padding-left:20px;">Note:</b>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

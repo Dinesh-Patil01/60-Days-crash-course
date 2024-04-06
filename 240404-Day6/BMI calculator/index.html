@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BMI Calculator</title>
+<style>
+    input[type="number"] {
+        width: 100px;
+        margin-bottom: 10px;
+    }
+</style>
+</head>
+<body>
+
+<h2>BMI Calculator</h2>
+<input type="number" id="weight" placeholder="Enter weight (kg)">
+<input type="number" id="height" placeholder="Enter height (cm)"><br>
+
+<button onclick="calculateBMI()">Calculate BMI</button>
+
+<p id="result"></p>
+
+<script>
+function calculateBMI() {
+    var weight = parseFloat(document.getElementById("weight").value);
+    var height = parseFloat(document.getElementById("height").value);
+    
+    if (isNaN(weight) || isNaN(height) || weight <= 0 || height <= 0) {
+        document.getElementById("result").innerHTML = "Please enter valid weight and height.";
+        return;
+    }
+    
+    var bmi = weight / (height * height);
+    var resultText = "BMI: " + bmi.toFixed(2) + "<br>";
+    
+    if (bmi <= 18.4) {
+        resultText += "Underweight";
+    } else if (bmi >= 18.5 && bmi <= 24.9) {
+        resultText += "Normal Weight";
+    } else if (bmi >= 25 && bmi <= 29.9) {
+        resultText += "Overweight";
+    } else {
+        resultText += "Obese";
+    }
+    
+    document.getElementById("result").innerHTML = resultText;
+}
+</script>
+
+</body>
+</html>
