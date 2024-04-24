@@ -1,49 +1,28 @@
-document.addEventListener("DOMContentLoaded", function() {
-    const sortButton = document.getElementById('sort-button');
-    sortButton.addEventListener('click', sortCountriesByPopulation);
-    fetchCountriesData();
-});
+let container = document.querySelector("container");
+fetch("https://dbioz2ek0e.execute-api.ap-south-1.amazonaws.com/mockapi/get-countries")
+.then(function(res){
+    return res.json();
+})
+.then(function(data){
+    // console.log(data);
+    showData(data)
+})
+.catch(function(error){
+    console.error("fetching error: ",error)
+})
 
-function fetchCountriesData() {
-    fetch('https://dbioz2ek0e.execute-api.ap-south-1.amazonaws.com/mockapi/get-countries')
-        .then(response => response.json())
-        .then(data => {
-            displayCountries(data);
-        })
-        .catch(error => {
-            console.error('Error fetching countries data:', error);
-        });
-}
+function showData(arr){
+    arr.forEach(function(ele,i){
+        let box = document.createElement("div");
 
-function displayCountries(countries) {
-    const countryContainer = document.getElementById('country-container');
-    countryContainer.innerHTML = ''; // Clear previous content
-    countries.forEach(country => {
-        const countryCard = createCountryCard(country);
-        countryContainer.appendChild(countryCard);
-    });
-}
+        let rank = document.createElement("h3")
+        rank.innerHTML = ele.Rank
 
-function createCountryCard(country) {
-    const countryCard = document.createElement('div');
-    countryCard.classList.add('country-card');
-    countryCard.innerHTML = `
-        <h2>${country.name}</h2>
-        <p>Population: ${country.population}</p>
-        <p>Capital: ${country.capital}</p>
-        <p>Region: ${country.region}</p>
-        <!-- Add more details here as needed -->
-    `;
-    return countryCard;
-}
+        let country = document.createElement("h3")
+        country.innerText = ele.country
 
-function sortCountriesByPopulation() {
-    fetch('https://dbioz2ek0e.execute-api.ap-south-1.amazonaws.com/mockapi/get-countries?sort=population&order=desc')
-        .then(response => response.json())
-        .then(data => {
-            displayCountries(data);
-        })
-        .catch(error => {
-            console.error('Error sorting countries by population:', error);
-        });
+
+        box.append(rank)
+        container.append(box)
+    })
 }

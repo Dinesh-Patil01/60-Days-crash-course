@@ -15,7 +15,7 @@ function fetchUsers() {
 }
 
 function displayUsers(users) {
-    userContainer.innerHTML = ''; // Clear previous content
+    userContainer.innerHTML = ''; 
     users.forEach(user => {
         const userCard = createUserCard(user);
         userContainer.appendChild(userCard);
