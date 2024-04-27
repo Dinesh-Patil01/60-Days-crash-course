@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="sl.css">
+</head>
+<body>
+    <div id="container">
+        <div id="signup">
+            <h3>Signup</h3>
+            <input id="name" type="text" placeholder="Enter Name">
+            <input  id="email" type="text" placeholder="Enter Email">
+            <input id="Password" type="text" placeholder="Enter Password">
+            <button type="submit" onclick="signup()" value="SignUp">SignUp</button>
+        </div>
+    
+        <div id="login">
+            <h3>Login</h3>
+            <input  id="logEmail" type="text" placeholder="Enter Email">
+            <input id="lPassword" type="text" placeholder="Enter Password">
+            <button type="submit" onclick="login()" value="login">login </button>
+        </div>
+    </div>
+</body>
+<script>
+function signup(){
+    
+    let name = document.getElementById("name").value;
+    let email = document.getElementById("email").value;
+    let password = document.getElementById("Password").value;
+
+    let user = {name, email,password};
+    fetch("http://localhost:3000/users",{
+        method:"POST",
+        headers:{
+            "Content-Type":"application/json"
+        },
+        body:JSON.stringify(user)
+    })
+    .then(()=>{
+        console.log("SignUp Successfully");
+        alert("SignUp Successfully, Please Login...")
+    }).catch((err)=>{
+        console.log("err",err)
+    })
+
+}
+
+async function login(){
+    
+    let logEmail = document.getElementById("logEmail").value;
+    let lPassword = document.getElementById("lPassword").value;
+    let res = await fetch("http://localhost:3000/users");
+    let data = await res.json()
+    //console.log(data)
+    let flag = false
+    data.forEach((ele,i)=>{
+        if(ele.email == logEmail){
+            if(ele.password == lPassword ){
+                flag = true
+                localStorage.setItem("loginUser", JSON.stringify(ele))
+                alert("Login Successfully")
+                window.location.href="product.html"
+            }else{
+                alert("Wrong Password")
+            }
+        }
+    })
+if(flag == false){
+    alert("User Not Found, Please Register")
+}
+    
+}
+</script>
+</html>
