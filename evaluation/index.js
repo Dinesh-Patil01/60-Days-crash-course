@@ -1,6 +1,6 @@
 let department = document.querySelector("#departments")
-let gender = document.querySelector("#gender")
-let salary = document.querySelector("#salary")
+let gender = document.querySelector("#genders")
+let salary = document.querySelector("#sal")
 
 
 let tbody = document.querySelector("tbody")
