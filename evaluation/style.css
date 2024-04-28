@@ -1,0 +1,24 @@
+#nav{
+display: flex;
+justify-content: space-around;
+border: 2px solid red;
+
+}
+#department{
+    display: flex;
+}
+
+#gender{
+    display: flex;
+}
+#salary{
+    display: flex;
+}
+
+select{
+    height: 20px;
+    margin-top: 20px;
+    margin-left: 10px;
+}
+
+
