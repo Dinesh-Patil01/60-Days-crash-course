@@ -1,93 +1,92 @@
-let employeeName = document.querySelector("#name");
-let employeeId = document.querySelector("#employeeID");
-let department = document.querySelector("#department");
-let experience = document.querySelector("#exp");
-let email = document.querySelector("#email");
-let number = document.querySelector("#mbl");
-let btn = document.querySelector("#btn");
+let form = document.querySelector("form")
+let tbody = document.querySelector("tbody")
+
+loadLocalStorageData()
+
+form.addEventListener("submit", function(e){
+  e.preventDefault();
+
+  let name = document.getElementById("name").value;
+  let employeeID = document.getElementById("employeeID").value;
+  let department = document.getElementById("department").value;
+  let experience = document.getElementById("exp").value;
+  let email = document.getElementById("email").value;
+  let mobile = document.getElementById("mbl").value;
+  let role = calculateRole(experience);
+
+  let newRow = `
+  <tr>
+  <th>${name}</th>
+  <th>${employeeID}</th>
+  <th>${department}</th>
+  <th>${experience}</th>
+  <th>${email}</th>
+  <th>${mobile}</th>
+  <th>${role}</th>
+  <th><button onclick="deleteRow(this)")>Delete</button></th>
+</tr>
+  `
+tbody.innerHTML += newRow;
+saveToLocalStorage()
+form.reset();
+});
 
 
-let data = []
 
-function saveData(){
-    localStorage.setItem("data",JSON.stringify(data))
+function calculateRole(experience){
+  if (experience > 5 ){
+    return("Senior");
+  }
+else if (experience >= 2 && experience <= 5){
+  return("Junior");
+}
+else{
+  return("Fresher");
+}
 }
 
-function loadData(){
-    let storedValue = JSON.parse(localStorage.getItem("data"))
-    
-    if(storedValue){
-      data = storedValue
-      showData(data)
+function deleteRow (row){
+  let r = row.closest("tr");
+  r.parentNode.remove(r);
+  saveToLocalStorage();
+}
+
+function saveToLocalStorage(){
+  let rows = tbody.querySelectorAll("tr")
+  const data = []
+
+  rows.forEach((row)=>{
+    let rowData = {
+      name : row.cells[0].textContent,
+      employeeID : row.cells[1].textContent,
+      department : row.cells[2].textContent,
+      experience : row.cells[3].textContent,
+      email : row.cells[4].textContent,
+      mobile : row.cells[5].textContent,
+      role : row.cells[6].textContent,
     }
-
-}
-
-function handleClick(){
-    let obj = {
-        name : employeeName.value,
-        id : employeeId.value,
-        department: department.value,
-        experience: experience.value,
-        email: email.value,
-        number: number.value,
-    }
-    data.push(obj)
-
-    saveData()    
-    saveData(data)
-    console.log(data);
-}
-
-function showData(arr){
-  tableBody.innerHTML = ""
-  arr.array.forEach(function(ele,i) {
-    let tr = document.createElement("tr")
-
-    let td1 = document.createElement("td")
-    td1.innerHTML = ele.name
-
-    let td2 = document.createElement("td")
-    td2.innerHTML = ele.id
-
-    let td3 = document.createElement("td")
-    td3.innerHTML = ele.department
-
-    let td4 = document.createElement("td")
-    td1.innerHTML = ele.experience
-
-    let td5 = document.createElement("td")
-    td2.innerHTML = ele.email
-
-    let td6 = document.createElement("td")
-    td3.innerHTML = ele.number
-
-
-    let td7 = document.createElement("td")
-       let btn = document.createElement("button")
-       btn.innerHTML = "Delete"
-       btn.addEventListener("click" ,function(){
-        handleDelete(i)
-       })
-       td7.append(btn)
-
-       tr.append(td1 , td2 , td3 , td4 ,td5 , td6 , td7)
-       tableBody.append(tr)
-
+    data.push(rowData);
   });
+
+  localStorage.setItem("employeeData", JSON.stringify(data));
+
 }
 
-function handleDelete(index){
-
-  data = data.filter(function (ele,i){
-        return index!==i
+function loadLocalStorageData(){
+  let storeData = JSON.parse(localStorage.getItem("employeeData"))
+  storeData.forEach(data=>{
+   let newRow = `
+   <tr>
+    <th>${data.name}</th>
+    <th>${data.employeeID}</th>
+    <th>${data.department}</th>
+    <th>${data.experience}</th>
+    <th>${data.email}</th>
+    <th>${data.mobile}</th>
+    <th>${data.role}</th>
+    <th><button onclick="deleteRow(this)")>Delete</button></th>
+  </tr>`
+  tbody.innerHTML += newRow;
   })
- 
-  saveData()
-  showData(data)
 
-
-
-btn.addEventListener("click",handleClick)
-
-
+}

@@ -29,6 +29,12 @@
       "email": "",
       "password": "",
       "id": 5
+    },
+    {
+      "name": "gopi",
+      "email": "an@gmail.com",
+      "password": "1234",
+      "id": 6
     }
   ],
   "products": [

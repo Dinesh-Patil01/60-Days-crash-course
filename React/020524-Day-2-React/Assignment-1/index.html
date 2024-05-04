@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dynamic List Rendering</title>
+</head>
+<body>
+  <div id="root"></div>
+  <script src="https://www.unpkg.com/react@18.2.0/umd/react.development.js"></script>
+  <script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    let rootElement = document.getElementById("root")
+
+    function Gallery ({children}){
+      return <div style={{
+        display:"grid",
+        gridTemplateColumns: "repeat(3, 1fr)",
+        gap:"20px"
+      }}>{children}</div>
+    }
+    function Image({ src }) {
+      return <img src={src} alt="Gallery Image" style={{ width: '90%', height: '250px' }} />;
+    }
+
+
+    function App (){
+      return (
+        <>
+          <Gallery>
+              <Image src="https://cdn.pixabay.com/photo/2017/02/20/18/03/cat-2083492_1280.jpg" />
+              <Image src="https://images.pexels.com/photos/792381/pexels-photo-792381.jpeg?auto=compress&cs=tinysrgb&w=600" />
+              <Image src="https://images.pexels.com/photos/34231/antler-antler-carrier-fallow-deer-hirsch.jpg?auto=compress&cs=tinysrgb&w=600" />
+              <Image src="https://images.pexels.com/photos/162140/duckling-birds-yellow-fluffy-162140.jpeg?auto=compress&cs=tinysrgb&w=600" />
+              <Image src="https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg?auto=compress&cs=tinysrgb&w=600" />
+              <Image src="https://images.pexels.com/photos/97533/pexels-photo-97533.jpeg?auto=compress&cs=tinysrgb&w=600" />
+              <Image src="https://images.pexels.com/photos/635499/pexels-photo-635499.jpeg?auto=compress&cs=tinysrgb&w=600" />
+              <Image src="https://images.pexels.com/photos/219906/pexels-photo-219906.jpeg?auto=compress&cs=tinysrgb&w=600" />
+              <Image src="https://images.pexels.com/photos/847393/pexels-photo-847393.jpeg?auto=compress&cs=tinysrgb&w=600" />
+              <Image src="https://images.pexels.com/photos/45853/grey-crowned-crane-bird-crane-animal-45853.jpeg?auto=compress&cs=tinysrgb&w=600" />
+              <Image src="https://images.pexels.com/photos/460775/pexels-photo-460775.jpeg?auto=compress&cs=tinysrgb&w=600" />
+              <Image src="https://images.pexels.com/photos/50577/hedgehog-animal-baby-cute-50577.jpeg?auto=compress&cs=tinysrgb&w=600" />
+              <Image src="https://images.pexels.com/photos/1829979/pexels-photo-1829979.jpeg?auto=compress&cs=tinysrgb&w=600" />
+          </Gallery>
+        </>
+      )
+    }
+
+    ReactDOM.createRoot(rootElement).render(<App/>)
+
+  </script>
+</body>
+</html>
