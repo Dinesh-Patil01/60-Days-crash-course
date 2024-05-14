@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Template</title>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://www.unpkg.com/react@18.2.0/umd/react.development.js"></script>
+  <script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    let rootElement = document.getElementById("root")
+   
+    const questions = [
+    {
+        question: '1.Who created React.js?',
+        options: ['Jordan Mike', 'Jordan Walke', 'Tim Lee', 'Jordan Lee'],
+        correctAnswer: 'Jordan Walke'
+    },
+    {
+        question: '2.In which language is React.js written?',
+        options: ['Python', 'JavaScript', 'Java', 'PHP'],
+        correctAnswer: 'JavaScript'
+    },
+    {
+        question: '3.Which of the following is used in React.js to increase performance?',
+        options: ['Virtual DOM', 'Original DOM', 'Both A and B', 'None of the above'],
+        correctAnswer: 'Virtual DOM'
+    },
+    {
+        question: '4.Identify the one which is used to pass data to components from outside',
+        options: ['Render with arguments', 'setState', 'PropTypes', 'props'],
+        correctAnswer: 'props'
+    },
+    {
+        question: '5.What is ReactJS mainly used for building?',
+        options: ['Database', 'Connectivity', 'User Interface', 'Design Platform'],
+        correctAnswer: 'User Interface'
+    }
+    ];
+
+    function Quiz() {
+    const [userAnswers, setUserAnswers] = React.useState(Array(questions.length).fill(''));
+    const [showScore, setShowScore] = React.useState(false);
+    const [score, setScore] = React.useState(0);
+
+    const handleAnswerChange = (index, selectedOption) => {
+        const newAnswers = [...userAnswers];
+        newAnswers[index] = selectedOption;
+        setUserAnswers(newAnswers);
+    };
+
+    const handleSubmit = () => {
+        let calculatedScore = 0;
+        questions.forEach((question, index) => {
+        if (question.correctAnswer === userAnswers[index]) {
+            calculatedScore++;
+        }
+        });
+        setScore(calculatedScore);
+        setShowScore(true);
+    };
+
+    const restartQuiz = () => {
+        setUserAnswers(Array(questions.length).fill(''));
+        setShowScore(false);
+        setScore(0);
+    };
+
+    return (
+        <div style={{fontSize:'16px',marginLeft:'25%'}}>
+            <h1 style={{fontSize:'30px',marginLeft:'25%'}}>Quiz</h1>
+        {showScore ? (
+            <div>
+                <h1>Hey👋,Buddy Your Scores</h1>
+            <h1 style={{color:'green'}}>You secured: {score}/{questions.length}</h1>
+            <h1 style={{color:''}}>Keep It Up✌️</h1>
+            <button onClick={restartQuiz} style={{width:'25%',height:'30px',fontSize:'20px',}}>Restart Quiz</button>
+            </div>
+        ) : (
+            <div style={{border:'2px solid black',width:'60%',}}>
+            {questions.map((question, index) => (
+                <div key={index} >
+                <h3>{question.question}</h3>
+                {question.options.map((option, optionIndex) => (
+                    <div key={optionIndex}>
+                    <input
+                        type="radio"
+                        id={`question-${index}-option-${optionIndex}`}
+                        name={`question-${index}`}
+                        value={option}
+                        checked={userAnswers[index] === option}
+                        onChange={() => handleAnswerChange(index, option)}
+                    />
+                    <label htmlFor={`question-${index}-option-${optionIndex}`}>{option}</label>
+                    </div>
+                ))}
+                </div>
+            ))}
+            <button onClick={handleSubmit} style={{width:'25%',height:'30px',fontSize:'20px',margin:'20px 30%'}}>Submit</button>
+            </div>
+        )}
+        </div>
+    );
+    }
+
+    ReactDOM.createRoot(rootElement).render(<Quiz />)
+  </script>
+</html>

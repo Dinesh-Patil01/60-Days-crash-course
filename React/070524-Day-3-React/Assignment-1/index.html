@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Template</title>
+    <style>
+        #head{
+            display: flex;
+            justify-content: center;
+        }
+        #container{
+            display: flex;
+            margin-top: 4%;
+            width: 100%;
+            justify-content: center;
+        }
+        #hex{
+            width: 35%;
+            height: 30px;
+            margin-right: 30px;
+            font-size: 14px;
+        }
+        button{
+            width: 10%;
+            font-size: large;
+        }
+        #display{
+            border: 2px solid black;
+            width: 450px;
+            height: 300px;
+            display: flex;
+            margin-top: 4%;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+        }
+        #parent{
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            /* border: 2px solid black; */
+        }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://www.unpkg.com/react@18.2.0/umd/react.development.js"></script>
+  <script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    
+    let rootElement = document.getElementById("root")
+    function App(){
+        const [color, setColor] = React.useState("")
+        const handleChange=(event)=>{
+            setColor(event.target.value);
+        }
+         return(
+            <div id="parent">
+                <h1 id="head">Hii👋,Welcome To Color Picker!!</h1>  
+                <div id="container">
+                    <input 
+                    type="text" 
+                    name="" id="hex"
+                    value={color} 
+                    onChange={handleChange}
+                    placeholder="Please write color value in HEX format here👈 (e.g., #FFFFFF for white)"/> 
+                    <button>Preview</button>    
+                </div>
+                <div id="display" style={{backgroundColor: color, }}>
+                    <h1>Here your color will be display☺️</h1>    
+                </div>
+            </div>
+        )
+    }
+
+    ReactDOM.createRoot(rootElement).render(<App />)
+
+  </script>
+</html>

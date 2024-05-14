@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Template</title>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://www.unpkg.com/react@18.2.0/umd/react.development.js"></script>
+  <script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    
+let rootElement = document.getElementById("root")
+
+function HobbyForm() {
+  const [hobbies, setHobbies] = React.useState(['']); // Initial state with one empty hobby field
+
+  // Function to handle adding a new hobby field
+  const addHobbyField = () => {
+    setHobbies([...hobbies, '']); // Add an empty string to the hobbies array
+  };
+
+  // Function to handle removing a hobby field
+  const removeHobbyField = (index) => {
+    const newHobbies = [...hobbies];
+    newHobbies.splice(index, 1); // Remove the hobby at the given index
+    setHobbies(newHobbies);
+  };
+
+  // Function to handle changes in hobby input fields
+  const handleHobbyChange = (value, index) => {
+    const newHobbies = [...hobbies];
+    newHobbies[index] = value; // Update the hobby at the given index
+    setHobbies(newHobbies);
+  };
+
+  // Function to handle form submission
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log(hobbies); // Log the array of hobbies to the console
+  };
+
+  return (
+    <form onSubmit={handleSubmit} style={{border:'2px solid black', width:'50%', height:'550px', marginLeft:'25%'}}>
+      <h1 style={{marginLeft:'23%'}}>Please write your Hobbies 👇</h1>
+      {hobbies.map((hobby, index) => (
+        <div key={index}>
+          <input
+            type="text"
+            value={hobby}
+            onChange={(e) => handleHobbyChange(e.target.value, index)}
+            style={{width:'60%',height:'30px', fontSize:'20px', marginBottom:'20px',marginLeft:'20px'}}
+          />
+          {index !== 0 && ( // Only show remove button for additional hobby fields
+            <button type="button" onClick={() => removeHobbyField(index)} style={{width:'25%',height:'30px', fontSize:'20px',marginLeft:'20px'}}>
+              Remove
+            </button>
+          )}
+        </div>
+      ))}
+      <button  type="button" onClick={addHobbyField} style={{width:'40%',height:'30px', fontSize:'20px',marginLeft:'20px'}}>
+        Add Hobby
+      </button>
+      <button type="submit" style={{width:'40%',height:'30px', fontSize:'20px',marginLeft:'20px'}}>Submit</button>
+    </form>
+  );
+}
+
+ReactDOM.createRoot(rootElement).render(<HobbyForm/>)
+
+</script>
+</html>
