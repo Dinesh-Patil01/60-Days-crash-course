@@ -1,0 +1,12 @@
+{
+  "tickets": [
+    {
+      "id": 1,
+      "title": "Sample Ticket",
+      "description": "This is a sample ticket.",
+      "assignee": "John Doe",
+      "status": "Pending",
+      "priority": 5
+    }
+  ]
+}
